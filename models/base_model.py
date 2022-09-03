@@ -5,7 +5,7 @@ Contains the Base class for the AirBnB clone console.
 """
 from uuid import uuid4
 from datetime import datetime
-from models.base_model import BaseModel
+import models
 from models import storage
 
 
@@ -18,36 +18,36 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
-                elif key == "updated_at" or key == "created_at":
-                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                elif key not in ["created_at", "updated_at"]:
+                    self.__setattr__(key, kwargs[key])
                 else:
-                    setattr(self, key, value)
-                setattr(self, key, value)
+                    self.__setattr__(key, datetime.fromisoformat(kwargs[key]))
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """ Method Dicription Here
         """
 
         return "[{}] ({}) {}".\
-            format(type(self).__name__, self.id, self.__dict__)
+            format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """ Method Dicription Here
         """
 
         self.update_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """ Method Dicription Here
         """
 
         dictionary = self.__dict__.copy()
-        dictionary.update({'__class__': (type(self).__name__)})
+        dictionary["__class__"] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
 
