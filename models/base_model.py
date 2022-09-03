@@ -46,7 +46,7 @@ class BaseModel:
         """ Method Dicription Here
         """
 
-        dictionary =  self.__dict__.copy()
+        dictionary = self.__dict__.copy()
         dictionary.update({'__class__': (type(self).__name__)})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
