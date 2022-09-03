@@ -10,12 +10,12 @@ from models import storage
 
 
 class BaseModel:
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         """ Method Dicription Here
         """
 
         if len(kwargs) != 0:
-            for key, value in kwargs.items():
+            for key in kwargs.keys():
                 if key == "__class__":
                     continue
                 elif key not in ["created_at", "updated_at"]:
