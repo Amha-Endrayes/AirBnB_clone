@@ -43,8 +43,7 @@ class BaseModel:
     def to_dict(self):
         """ Method Dicription Here
         """
-        dictionary = {}
-        dictionary.update(self.__dict__)
+        dictionary =  self.__dict__.copy()
         dictionary.update({'__class__': (type(self).__name__)})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
