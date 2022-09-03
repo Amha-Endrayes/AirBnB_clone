@@ -3,7 +3,6 @@
 Base Class Module
 Contains the Base class for the AirBnB clone console.
 """
-
 from uuid import uuid4
 from datetime import datetime
 from models.base_model import BaseModel
@@ -14,6 +13,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """ Method Dicription Here
         """
+
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "__class__":
@@ -31,18 +31,21 @@ class BaseModel:
     def __str__(self):
         """ Method Dicription Here
         """
+
         return "[{}] ({}) {}".\
             format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """ Method Dicription Here
         """
+
         self.update_at = datetime.now()
         storage.save()
 
     def to_dict(self):
         """ Method Dicription Here
         """
+
         dictionary =  self.__dict__.copy()
         dictionary.update({'__class__': (type(self).__name__)})
         dictionary['created_at'] = self.created_at.isoformat()
