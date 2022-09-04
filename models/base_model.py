@@ -14,7 +14,6 @@ class BaseModel:
 
     def __init__(self, **kwargs):
         """ Initialization of the base model """
-
         if len(kwargs) != 0:
             for key in kwargs.keys():
                 if key == "__class__":
@@ -31,19 +30,16 @@ class BaseModel:
 
     def __str__(self):
         """ String representation of the BaseModel class"""
-
         return "[{}] ({}) {}".\
             format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """ updates the attribute 'updated_at' with the current datetime """
-
         self.update_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values of the instance"""
-
         dictionary = self.__dict__.copy()
         dictionary["__class__"] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
