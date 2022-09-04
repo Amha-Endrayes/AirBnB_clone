@@ -5,25 +5,25 @@ from models.review import Review
 
 
 class test_review(test_basemodel):
-    """ """
+    """ Tests review.py module """
 
     def __init__(self, *args, **kwargs):
-        """ """
+        """ inits review test """
         super().__init__(*args, **kwargs)
         self.name = "Review"
         self.value = Review
 
     def test_place_id(self):
-        """ """
+        """ tests for place id assignment errors """
         new = self.value()
         self.assertEqual(type(new.place_id), str)
 
     def test_user_id(self):
-        """ """
+        """ tests for user id assignment errors"""
         new = self.value()
         self.assertEqual(type(new.user_id), str)
 
     def test_text(self):
-        """ """
+        """ tests for text assignment errors"""
         new = self.value()
         self.assertEqual(type(new.text), str)
