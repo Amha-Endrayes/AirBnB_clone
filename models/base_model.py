@@ -10,9 +10,10 @@ from models import storage
 
 
 class BaseModel:
+     """The BaseModel class from which future classes will be derived"""
+
     def __init__(self, **kwargs):
-        """ Method Dicription Here
-        """
+        """ Initialization of the base model """
 
         if len(kwargs) != 0:
             for key in kwargs.keys():
@@ -29,22 +30,19 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """ Method Dicription Here
-        """
+        """ String representation of the BaseModel class"""
 
         return "[{}] ({}) {}".\
             format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """ Method Dicription Here
-        """
+        """ updates the attribute 'updated_at' with the current datetime """
 
         self.update_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """ Method Dicription Here
-        """
+        """ returns a dictionary containing all keys/values of the instance"""
 
         dictionary = self.__dict__.copy()
         dictionary["__class__"] = self.__class__.__name__
