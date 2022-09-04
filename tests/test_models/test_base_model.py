@@ -22,10 +22,9 @@ class test_basemodel(unittest.TestCase):
         pass
 
     def tearDown(self):
-        try:
-            os.remove('file.json')
-        except:
-            pass
+        """ """
+        self.resetStorage()
+        pass
 
     def test_default(self):
         """ """
